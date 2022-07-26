@@ -1,0 +1,27 @@
+<% layout("./layouts/layout.eta") %>
+
+<h1>Topic-specific Questions</h1>
+
+
+<% if (it.questions && it.questions.length > 0) { %>
+
+<ul>
+<% it.questions.forEach(question => { %>
+  <li><a href="/topics/<%= question.topic_id %>/questions/<%= question.id %>"><%= question.question_text %></a></li>
+<% }); %>
+</ul>
+
+<% } else { %>
+
+<p>None available.</p>
+
+<% } %>
+
+<h2>Add a question for this topic!</h2>
+
+<form method="POST" action="/topics/<%= it.topic_id %>/questions">
+Question text:<br/>
+<input type="text" name="question_text" /><br/>
+<input type="submit" value="Add"/>
+</form>
+

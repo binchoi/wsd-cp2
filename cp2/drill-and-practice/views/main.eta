@@ -1,0 +1,8 @@
+<% layout("./layouts/layout.eta") %>
+
+<h1>Spaced Repetition: A tool for growth!</h1>
+
+<h2>Log-In or Register</h2>
+
+<h2>Statistics</h2>
+<% /* INSERT STATS HERE */ %>
