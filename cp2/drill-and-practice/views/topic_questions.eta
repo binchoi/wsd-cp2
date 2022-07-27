@@ -25,3 +25,4 @@ Question text:<br/>
 <input type="submit" value="Add"/>
 </form>
 
+Back to <a href="/topics">Topic List</a>

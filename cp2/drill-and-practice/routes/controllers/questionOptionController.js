@@ -1,22 +1,27 @@
-import * as questionOptionService from "../../services/questionService.js";
+import * as questionOptionService from "../../services/questionOptionService.js";
 
-const addQuestionOption = async ({ params, request, response }) => {
+const addOption = async ({ params, request, response }) => {
   const body = request.body({ type: "form" });
   const pp = await body.value;
 
-  await questionService.addQuestion(
+  await questionOptionService.addOption(
     params.qId, // question_id
     pp.get("option_text"), // option_text
     pp.has("is_correct"), // is_correct
   );
 
   // validation
-
-  response.redirect(`/topics/${params.id}/questions/${params.qId};`);
+  
+  response.redirect(`/topics/${params.tId}/questions/${params.qId}`);
 };
 
-const listQuestions = async ({ params, render }) => {
-  render("topic_questions.eta", { topic_id: params.id, questions: await questionService.listQuestions(params.id) });
+const listOptions = async ({ params, render }) => {
+  render("question_options.eta", { topic_id: params.tId, question_id: params.qId, options: await questionOptionService.listOptions(params.qId) });
 };
 
-export { addQuestion, listQuestions };
+const deleteOption = async ({ params, response }) => {
+  await questionOptionService.deleteOption(params.oId);
+  response.redirect(`/topics/${params.tId}/questions/${params.qId}`);
+};
+
+export { addOption, listOptions, deleteOption };

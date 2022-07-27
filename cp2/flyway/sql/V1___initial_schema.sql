@@ -29,7 +29,7 @@ CREATE TABLE question_answers (
   id SERIAL PRIMARY KEY,
   user_id INTEGER REFERENCES users(id),
   question_id INTEGER REFERENCES questions(id) ON DELETE CASCADE,
-  question_answer_option_id INTEGER REFERENCES question_answer_options(id)
+  question_answer_option_id INTEGER REFERENCES question_answer_options(id) ON DELETE CASCADE
 );
 
 CREATE UNIQUE INDEX ON users((lower(email)));

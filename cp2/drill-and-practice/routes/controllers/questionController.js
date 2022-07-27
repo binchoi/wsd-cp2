@@ -19,4 +19,10 @@ const listQuestions = async ({ params, render }) => {
   render("topic_questions.eta", { topic_id: params.id, questions: await questionService.listQuestions(params.id) });
 };
 
-export { addQuestion, listQuestions };
+const deleteQuestion = async ({ params, response }) => {
+  await questionService.deleteQuestion(params.qId);
+  response.redirect(`/topics/${params.tId}`);
+};
+
+
+export { addQuestion, listQuestions, deleteQuestion };

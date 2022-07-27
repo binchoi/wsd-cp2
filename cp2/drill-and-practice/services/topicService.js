@@ -4,16 +4,18 @@ const addTopic = async (userId, name) => {
   await executeQuery(
     `INSERT INTO topics
       (user_id, name)
-        VALUES ($1, $2)`,
-    userId,
-    name,
+        VALUES ($userId, $name)`,
+    {
+      userId: userId,
+      name: name,
+    }
   );
 };
 
 const deleteTopic = async (id) => {
   await executeQuery(
-    `DELETE FROM topics WHERE id=$1`,
-    id,
+    `DELETE FROM topics WHERE id=$id`,
+    {id: id},
   );
 };
 

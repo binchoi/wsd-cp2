@@ -3,13 +3,13 @@ import { Pool } from "../deps.js";
 const CONCURRENT_CONNECTIONS = 2;
 const connectionPool = new Pool({}, CONCURRENT_CONNECTIONS);
 
-const executeQuery = async (query, ...args) => {
+const executeQuery = async (query, params) => {
   const response = {};
   let client;
 
   try {
     client = await connectionPool.connect();
-    const result = await client.queryObject(query, ...args);
+    const result = await client.queryObject(query, params);
     if (result.rows) {
       response.rows = result.rows;
     }
