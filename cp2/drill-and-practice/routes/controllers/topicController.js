@@ -12,8 +12,8 @@ const addTopic = async ({ request, response }) => {
   response.redirect("/topics");
 };
 
-const listTopics = async ({ render }) => {
-  render("topics.eta", { topics: await topicService.listTopics() });
+const listTopics = async ({ render, user }) => {
+  render("topics.eta", { topics: await topicService.listTopics(), user: user });
 };
 
 const deleteTopic = async ({ params, response }) => {

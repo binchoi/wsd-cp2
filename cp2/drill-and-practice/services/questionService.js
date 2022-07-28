@@ -41,6 +41,14 @@ const getRandQuestion = async (topic_id) => {
     return res.rows;
 };
 
+const getRandomQuestions = async () => {
+  const res = await executeQuery(`SELECT * FROM questions
+  ORDER BY RANDOM()
+  `);
+
+  return res.rows;
+};
+
 const deleteQuestion = async (qId) => {
   await executeQuery(
     `DELETE FROM questions WHERE id=$qId`,
@@ -48,4 +56,4 @@ const deleteQuestion = async (qId) => {
   );
 };
 
-export { addQuestion, listQuestions, deleteQuestion, getRandQuestion, getQuestionById };
+export { addQuestion, listQuestions, deleteQuestion, getRandQuestion, getQuestionById, getRandomQuestions };

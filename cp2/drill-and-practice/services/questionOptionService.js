@@ -31,6 +31,18 @@ const listOptions = async (question_id) => {
     return res.rows;
 };
 
+const getCorrectOption = async (question_id) => {
+  const res = await executeQuery(`SELECT * from question_answer_options
+  WHERE question_id = $question_id AND is_correct = true`,
+  {question_id: question_id});
+
+  if ( res.length <1) {
+    return;
+  }
+
+  return res.rows[0];
+};
+
 const deleteOption = async (o_id) => {
   await executeQuery(
     `DELETE FROM question_answer_options WHERE id=$o_id`,
@@ -39,4 +51,4 @@ const deleteOption = async (o_id) => {
 };
 
 
-export { addOption, listOptions, deleteOption, getOptionById };
+export { addOption, listOptions, deleteOption, getOptionById, getCorrectOption };

@@ -8,7 +8,7 @@
 <% it.topics.forEach(topic => { %>
   <li>
   <a href="/topics/<%= topic.id %>"><%= topic.name %></a>
-  <form method="POST" action="/topics/<%= topic.id %>/delete"><input type="submit" value="Delete"/></form>
+  <% if (it.user.admin) { %><form method="POST" action="/topics/<%= topic.id %>/delete"><input type="submit" value="Delete"/></form><% } %>
   </li>
 <% }); %>
 </ul>
@@ -21,6 +21,8 @@
 
 
 <% /* SHOWN ONLY TO ADMINS */ %>
+<% if (it.user.admin) { %>
+
 <h2>Add a topic!</h2>
 
 <form method="POST" action="/topics">
@@ -28,3 +30,4 @@ Name:<br/>
 <input type="text" name="name" /><br/>
 <input type="submit" value="Add"/>
 </form>
+<% } %>
