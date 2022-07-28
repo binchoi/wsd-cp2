@@ -1,5 +1,14 @@
 import { executeQuery } from "../database/database.js";
 
+const getQuestionById = async (q_id) => {
+  const res = await executeQuery(`SELECT * FROM questions
+    WHERE id = $id
+    `,
+    {id: q_id});
+
+    return res.rows[0];
+}
+
 const addQuestion = async (userId, topic_id, q_text) => {
     await executeQuery(
       `INSERT INTO questions
@@ -25,7 +34,7 @@ const listQuestions = async (topic_id) => {
 
 const getRandQuestion = async (topic_id) => {
     const res = await executeQuery(`SELECT * FROM questions
-    WHERE topic_id = $topic_id ORDER BY RANDOM() LIMIT 1
+    WHERE topic_id = $topic_id ORDER BY RANDOM()
     `,
     {topic_id: topic_id});
 
@@ -39,4 +48,4 @@ const deleteQuestion = async (qId) => {
   );
 };
 
-export { addQuestion, listQuestions, deleteQuestion, getRandQuestion };
+export { addQuestion, listQuestions, deleteQuestion, getRandQuestion, getQuestionById };

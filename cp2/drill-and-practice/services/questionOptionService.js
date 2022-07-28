@@ -12,6 +12,15 @@ const addOption = async (question_id, option_text, is_correct) => {
           }
     );
   };
+
+const getOptionById = async (id) => {
+  const res = await executeQuery(`SELECT * FROM question_answer_options
+    WHERE id = $id
+    `,
+    {id: id});
+
+    return res.rows[0];
+}
   
   
 const listOptions = async (question_id) => {
@@ -30,4 +39,4 @@ const deleteOption = async (o_id) => {
 };
 
 
-export { addOption, listOptions, deleteOption };
+export { addOption, listOptions, deleteOption, getOptionById };

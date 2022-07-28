@@ -15,6 +15,6 @@
 
 <% } else { %>
 
-<p>None available.</p>
+<p>None available...</p>
 
 <% } %>

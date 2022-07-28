@@ -1,0 +1,7 @@
+<% layout("./layouts/layout.eta") %>
+
+<h1>BAD NEWS: There are no questions for this topic</h1>
+
+<h2>GOOD NEWS: You can add your own questions!</h2>
+
+Let's get studying: <a href="/topics/<%= it.tId %>">Add your questions</a>
