@@ -1,35 +1,43 @@
 <% layout("./layouts/layout.eta") %>
 
-<h1>Answer Options for Q<%= it.question_id %></h1>
+<h2>Q<%= it.question_id %>: <%= it.question.question_text %></h2>
+<h4>Answer Options</h4>
 <% if (it.options && it.options.length > 0) { %>
-
 <ul>
 <% it.options.forEach(option => { %>
-  <li><% if (option.is_correct) { %>✅<% } else { %>❎<% } %><%= option.option_text %> 
+  <li><% if (option.is_correct) { %>✅ <% } else { %>❎ <% } %><%= option.option_text %> 
   <form method="POST" action="/topics/<%= it.topic_id %>/questions/<%= it.question_id %>/options/<%= option.id %>/delete">
   <input type="submit" value="Delete"/>
   </form>
+  </br>
   </li> 
 <% }); %>
 </ul>
 
 <% } else { %>
 
-<p>None available.</p>
+<p>None available... if this question is not necessary, you may delete it using the button below!</p>
 
 <form method="POST" action="/topics/<%= it.topic_id %>/questions/<%= it.question_id %>/delete"><input type="submit" value="Delete Question!"/></form>
 
 <% } %>
 
-<h2>Add answer options for this question!</h2>
-
+<h3>Add your own answer options for this question!</h3>
+<% if (it.validationErrors) { %>
+<ul>
+    <% Object.keys(it.validationErrors).forEach((attribute) => { %>
+        <% Object.values(it.validationErrors[attribute]).forEach((err) => { %>
+            <li><%= err %></li>
+        <% }); %>
+    <% }); %>
+</ul>
+<% } %>
 <form method="POST" action="/topics/<%= it.topic_id %>/questions/<%= it.question_id %>/options">
 Answer Option:
-<input type="text" name="option_text" /><br/>
-Is this the correct answer?
-<input type="checkbox" name="is_correct" />
+<input type="text" name="option_text"  value="<%= it.option_text ? it.option_text : "" %>"/><br/>
+Is this the correct answer?<input type="checkbox" name="is_correct" /><br/>
 <input type="submit" value="Add"/>
 </form>
-
+<br/>
 Back to <a href="/topics/<%= it.topic_id %>">Question List for this Topic</a>
 

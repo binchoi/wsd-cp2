@@ -1,4 +1,4 @@
-import { Application, Session } from "./deps.js";
+import { Application, Session, oakCors } from "./deps.js";
 import { errorMiddleware } from "./middlewares/errorMiddleware.js";
 import { authMiddleware } from "./middlewares/authMiddleware.js";
 import { renderMiddleware } from "./middlewares/renderMiddleware.js";
@@ -13,6 +13,16 @@ app.use(errorMiddleware);
 app.use(authMiddleware);
 app.use(serveStaticMiddleware);
 app.use(renderMiddleware);
+app.use(oakCors());
+
 app.use(router.routes());
+
+let port = 7777;
+if (Deno.args.length > 0) {
+  const lastArgument = Deno.args[Deno.args.length - 1];
+  port = Number(lastArgument);
+}
+
+app.listen({ port: port });
 
 export { app };

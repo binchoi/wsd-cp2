@@ -2,6 +2,7 @@
 
 <h1>Incorrect!</h1>
 
-The correct option was <strong><%= it.correctOption.option_text %></strong>.</br>
+The correct option was...
+<h4><strong><%= it.correctOption.option_text %></strong>.</h4>
 
 Let's go to the <a href="/quiz/<%= it.tId %>">Next question</a>

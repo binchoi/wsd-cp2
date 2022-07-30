@@ -3,7 +3,7 @@
 // import * as questionService from "../services/questionService.js";
 
 // Deno.test("GET request to /api/questions/random should return a question and its answers", async () => {
-//     questionService.addQuestion(1,2,"q_text");
+//     await questionService.addQuestion(1,2,"q_text");
 //   const testClient = await superoak(app);
 //   await testClient
 //   .get("/api/questions/random")
@@ -13,3 +13,4 @@
 //         answerOptions: [],
 //     });
 // });
+// update introduced bugs

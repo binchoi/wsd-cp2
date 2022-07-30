@@ -22,7 +22,6 @@ const getOptionById = async (id) => {
     return res.rows[0];
 }
   
-  
 const listOptions = async (question_id) => {
     const res = await executeQuery(`SELECT * from question_answer_options
     WHERE question_id = $question_id`,
@@ -37,7 +36,7 @@ const getCorrectOption = async (question_id) => {
   {question_id: question_id});
 
   if ( res.length <1) {
-    return;
+    return undefined;
   }
 
   return res.rows[0];

@@ -1,7 +1,7 @@
 import * as userService from "../../services/userService.js";
 import { bcrypt } from "../../deps.js";
 
-const processLogin = async ({ request, response, state }) => {
+const processLogin = async ({ render, request, response, state }) => {
   const body = request.body({ type: "form" });
   const params = await body.value;
 
@@ -9,7 +9,7 @@ const processLogin = async ({ request, response, state }) => {
     params.get("email"),
   );
   if (userFromDatabase.length != 1) {
-    response.redirect("/auth/login");
+    render("login.eta", { error: "[ERROR] We could not verify the credentials entered"});
     return;
   }
 
@@ -20,12 +20,11 @@ const processLogin = async ({ request, response, state }) => {
   );
 
   if (!passwordMatches) {
-    response.redirect("/auth/login");
-    return;
+    render("login.eta", { error: "[ERROR] We could not verify the credentials entered"});
+  } else {
+    await state.session.set("user", user);
+    response.redirect("/topics");  
   }
-
-  await state.session.set("user", user);
-  response.redirect("/topics");
 };
 
 const showLoginForm = ({ render }) => {

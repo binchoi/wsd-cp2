@@ -1,12 +1,17 @@
 <% layout("./layouts/layout.eta") %>
 
-<h1>Spaced Repetition: A tool for growth!</h1>
-
-<h2>Log-In or Register</h2>
+<h1>SpaceGrow: A space for growth!</h1>
+Spaced repetition has been proven to be one of the most effecive ways of learning a new skill or field of knowledge. 
+I invite you to start learning and growing using my own spaced repetition application. With this web application, you as a user
+are able to contribute to question sets and add your own question/answers to our collective question bank. Then, you can test yourself 
+or your friends using our quiz functionality. Our admins are frequently adding new topics for our users every week, so be on the look out! 
+As a final note, the navigation bar will lead you when you are lost.
 
 <h2>Statistics</h2>
-<% /* INSERT STATS HERE */ %>
+<h4>Number of Topics: <%= it.topicCount %></h4>
+<h4>Number of Questions: <%= it.questionCount %></h4>
+<h4>Number of answer attempts (from users): <%= it.answerCount %></h4>
 
-View <a href="/topics">Topic List!</a> (requires login)<br/>
-<a href="/auth/login">Login</a><br/>
-<a href="/auth/register">Register</a><br/>
+<h3><a href="/auth/login">Login</a> or <a href="/auth/register">Register</a></h3>
+
+Take a look at our growing <a href="/topics">Topic List!</a> (requires login)<br/>

@@ -1,26 +1,16 @@
 import { executeQuery } from "../database/database.js";
 
-const addAnswerRecord = async (question_id, option_text, is_correct) => {
+const addAnswerRecord = async (uId, qId, oId) => {
     await executeQuery(
-      `INSERT INTO question_answer_options
-        (question_id, option_text, is_correct)
-          VALUES ($question_id, $option_text, $is_correct)`,
+      `INSERT INTO question_answers
+        (user_id, question_id, question_answer_option_id)
+          VALUES ($user_id, $question_id, $question_answer_option_id)`,
           {
-            question_id: question_id, 
-            option_text: option_text, 
-            is_correct: is_correct
+            user_id: uId, 
+            question_id: qId, 
+            question_answer_option_id: oId
         }
     );
   };
   
-  
-const listAnswerRecords = async (topic_id) => {
-    const res = await executeQuery(`SELECT * FROM questions
-    WHERE topic_id = $topic_id
-    `,
-    {topic_id: topic_id});
-
-    return res.rows;
-};
-
-export { addAnswerRecord, listAnswerRecords };
+export { addAnswerRecord };

@@ -2,12 +2,6 @@ import * as questionService from "../../services/questionService.js";
 import * as questionOptionService from "../../services/questionOptionService.js";
 
 const giveRandomQuestion = async ({ response }) => {
-
-    // find random question
-
-    // find all the options
-
-    // delete q id and is correct and return that array
     const questions = await questionService.getRandomQuestions();  
     if (questions.length < 1) {
         response.body = {}; 
@@ -31,4 +25,13 @@ const giveRandomQuestion = async ({ response }) => {
     }
 };
 
-export { giveRandomQuestion };
+const gradeAnswer = async ({ request, response}) => {
+    const body = request.body({ type: "json" });
+    const document = await body.value;
+    let option = await questionOptionService.getOptionById(document.optionId)
+    response.body = {
+        correct: option.is_correct,
+    };
+}
+
+export { giveRandomQuestion, gradeAnswer };

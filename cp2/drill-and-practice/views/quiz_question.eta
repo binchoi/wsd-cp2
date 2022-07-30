@@ -9,12 +9,13 @@
   <form method="POST" action="/quiz/<%= it.tId %>/questions/<%= it.question.id %>/options/<%= option.id %>">
   <input type="submit" value="Choose"/>
   </form>
+  <br/>
   </li> 
 <% }); %>
 </ul>
 
 <% } else { %>
 
-<p>No answer options available...</p>
+<p>No answer options available...  <a href="/quiz/<%= it.tId %>">Next question?</a></p>
 
 <% } %>
